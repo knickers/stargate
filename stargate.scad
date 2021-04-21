@@ -30,8 +30,49 @@ module chevron_arc() {
 	}
 }
 
+module chevron_trapezoid(angle=20) {
+	x = H/3;
+	difference() {
+		translate([-ID/6, 0, 0])
+			cube([ID/3, ID/4, H]);
+		translate([-x, 0, -1])
+			rotate(angle+90, [0,0,1])
+				cube([ID/3, ID/3, H+2]);
+		translate([x, 0, -1])
+			rotate(-angle, [0,0,1])
+				cube([ID/3, ID/3, H+2]);
+	}
+	/*
+	polygon([
+		[],
+		[],
+		[],
+		[],
+	]);
+	*/
+}
+
 module chevron() {
 	chevron_arc();
+
+	// Upper lighted chevron
+	difference() {
+		chevron_trapezoid();
+		translate([0, H*2, -1])
+			scale([1, 1, 2])
+				chevron_trapezoid();
+	}
+
+	// Lower movable chevron
+	translate([0, -H*2, 0])
+		difference() {
+			chevron_trapezoid(29);
+			translate([0, H*1.2, -1])
+				scale([1, 1, 2])
+					chevron_trapezoid();
+			translate([-ID/4, -H/1.4, -1])
+				cube([ID/2, H, H+2]);
+		}
 }
 
 difference() {
@@ -41,7 +82,7 @@ difference() {
 }
 
 b = 360/9;
-for (i = [0:8]) {
+for (i = [0:0]) {
 	rotate(b*i, [0,0,1])
 		chevron();
 }
@@ -59,5 +100,5 @@ for (i = [0:3:38]) {
 					);
 	rotate(a*i+a/2, [0,0,1])
 		translate([-H/16, ID*0.51, 0])
-			cube([H/8, H*2.1, H*7/8]);
+			cube([H/8, H*2.1, H*7/8]); // Symbol separator
 }
