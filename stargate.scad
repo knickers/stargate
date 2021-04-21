@@ -75,6 +75,10 @@ module chevron() {
 		}
 }
 
+import("images/chevron-lower.svg", center=true);
+translate([0, H*2, 0])
+	import("images/chevron-upper.svg", center=true);
+
 difference() {
 	ring(ID, OD, H);               // Main ring
 	translate([0, 0, H*0.70])
@@ -82,10 +86,12 @@ difference() {
 }
 
 b = 360/9;
+/*
 for (i = [0:0]) {
 	rotate(b*i, [0,0,1])
 		chevron();
 }
+*/
 
 a = -360/39;
 for (i = [0:3:38]) {
