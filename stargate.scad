@@ -9,7 +9,7 @@ H8 = H/8;
 A9 = 360/9;
 
 $fa = 0.01 + 0;
-$fs =    1 + 0;
+$fs =    4 + 0;
 //$fn = 50 + 0;
 
 module ring(id, od, h) {
@@ -59,7 +59,7 @@ module chevron() {
 
 			for (i = [0:1:5]) {         // Light slits
 				translate([-H*2, H8*i*1.5-H8*2, t-H8*0.6])
-					cube([H*4, H8*0.4, H]);
+					cube([H*4, H8*0.5, H]);
 			}
 		}
 }
@@ -76,7 +76,7 @@ module chevron_cutout() {
 				[+H8*4, -H8*4]  // Q4
 			]);
 		}
-		translate([-H*3, H*0.94, 0])
+		translate([-H*3, H*0.91, 0])
 			cube([H*6, H, H]);
 	}
 	w = H8*13;
@@ -85,11 +85,11 @@ module chevron_cutout() {
 }
 
 difference() {
-	ring(ID, OD, H);               // Main ring
+	ring(ID, OD, H);                 // Main ring
 
 	translate([0, 0, H8*6]) {
 		ring(ID*1.03, ID*1.2305, H); // Symbol trough
-		ring(OD*0.99, OD+1, H); // Outer trough
+		ring(OD*0.985, OD+1, H);     // Outer trough
 	}
 
 	for (i = [0:8]) {
@@ -105,7 +105,7 @@ for (i = [0:8]) {
 }
 
 a = -360/39;
-for (i = [0:1:38]) {
+for (i = [0:5:38]) {
 	rotate(a*i, [0,0,1])
 		translate([0, ID*0.565, 0])
 			linear_extrude(H8*7)
@@ -116,6 +116,6 @@ for (i = [0:1:38]) {
 						$fs=$fs*2
 					);
 	rotate(a*i+a/2, [0,0,1])
-		translate([-H8/2, ID*0.51, 0])
-			cube([H8, H*2.2, H8*7]); // Symbol separator
+		translate([-H8*2/6, ID*0.51, 0])
+			cube([H8*2/3, H*2.2, H8*6.5]); // Symbol separator
 }
