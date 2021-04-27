@@ -35,7 +35,7 @@ module chevron() {
 				cube([ID, ID, t+2]);    // Clip left point corner
 			translate([0, OD*0.48, 0])
 				linear_extrude(t+2)
-					scale(H8*0.93)
+					scale(H8*0.95)
 						import("images/chevron-upper.svg", center=true);
 		}
 	}
@@ -51,15 +51,15 @@ module chevron() {
 						import("images/chevron-light.svg", center=true);
 		}
 
-	translate([0, ID*0.62, 0])          // Lower moveable chevron
+	translate([0, ID*0.618, 0])          // Lower moveable chevron
 		difference() {
 			linear_extrude(t)
 				scale(H8*0.8)
 					import("images/chevron-lower.svg", center=true);
 
 			for (i = [0:1:5]) {         // Light slits
-				translate([-H*2, H8*i*1.5-H8*2, t-H8*0.6])
-					cube([H*4, H8*0.5, H]);
+				translate([-H*2, H8*i*1.7-H8*2.85, t-H8*0.6])
+					cube([H*4, H8*0.7, H]);
 			}
 		}
 }
@@ -79,9 +79,14 @@ module chevron_cutout() {
 		translate([-H*3, H*0.91, 0])
 			cube([H*6, H, H]);
 	}
-	w = H8*13;
-	translate([-w/2, OD*0.495, -1])
-		cube([w, OD*0.01, H+2]); // Top center arc cutout
+	translate([0, OD*0.48, -1])
+		difference() {
+			linear_extrude(H+2)
+				scale(H8*0.95)
+					import("images/chevron-upper.svg", center=true);
+			translate([-ID/2, -H*1.65, -2])
+				cube([ID, H*2, H+4]);
+		}
 }
 
 difference() {
@@ -105,7 +110,8 @@ for (i = [0:8]) {
 }
 
 a = -360/39;
-for (i = [0:5:38]) {
+w = H8*0.75;
+for (i = [0:1:38]) {
 	rotate(a*i, [0,0,1])
 		translate([0, ID*0.565, 0])
 			linear_extrude(H8*7)
@@ -116,6 +122,6 @@ for (i = [0:5:38]) {
 						$fs=$fs*2
 					);
 	rotate(a*i+a/2, [0,0,1])
-		translate([-H8*2/6, ID*0.51, 0])
-			cube([H8*2/3, H*2.2, H8*6.5]); // Symbol separator
+		translate([-w/2, ID*0.51, 0])
+			cube([w, H*2.2, H8*6.5]); // Symbol separator
 }
