@@ -110,8 +110,7 @@ for (i = [0:8]) {
 }
 
 a = -360/39;
-w = H8*0.75;
-for (i = [0:1:38]) {
+for (i = [0:5:38]) {
 	rotate(a*i, [0,0,1])
 		translate([0, ID*0.565, 0])
 			linear_extrude(H8*7)
@@ -122,6 +121,6 @@ for (i = [0:1:38]) {
 						$fs=$fs*2
 					);
 	rotate(a*i+a/2, [0,0,1])
-		translate([-w/2, ID*0.51, 0])
-			cube([w, H*2.2, H8*6.5]); // Symbol separator
+		translate([-H8/2, ID*0.51, 0])
+			cube([H8, H*2.2, H8*6.5]); // Symbol separator
 }
