@@ -58,7 +58,7 @@ module chevron() {
 					import("images/chevron-lower.svg", center=true);
 
 			for (i = [0:1:4]) {         // Light slits
-				translate([-H*2, H8*i*1.9-H8*2.85, t-H8*0.6])
+				translate([-H*2, H8*i*2.05-H8*2.85, t-H8*0.6])
 					cube([H*4, H8*0.8, H]);
 			}
 		}
