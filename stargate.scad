@@ -79,14 +79,10 @@ module chevron_cutout() {
 		translate([-H*3, H*0.91, 0])
 			cube([H*6, H, H8*2]); // Trough between chevron arc and main ring
 	}
-	translate([0, OD*0.48, -1])
-		difference() {
-			linear_extrude(H+2) // Angled sides of light cutout
-				scale(H8*0.95)
-					import("images/chevron-upper.svg", center=true);
-			translate([-H, -H*1.68, 0])
-				cube([H*2, H*2, H+2]); // Flat bottom of light cutout
-		}
+	translate([-H8*0.2, OD*0.588, -1])
+		linear_extrude(H+2)          // Angled sides of light cutout
+			scale(H8*2.4)
+				import("images/chevron-upper.svg", center=true);
 }
 
 difference() {
