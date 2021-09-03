@@ -116,5 +116,5 @@ for (i = [0:1:38]) {
 
 	rotate(a*i+a/2, [0,0,1])
 		translate([-H8/2, ID*0.51, 0])
-			cube([H8, H*2.2, H8*6.5]); // Symbol separator
+			cube([H8, H*2.2, H8*6.6]); // Symbol separator
 }
